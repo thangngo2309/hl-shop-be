@@ -1,20 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { IsString, IsNotEmpty, IsOptional, MinLength, IsEnum } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, Length, IsEnum, MinLength } from 'class-validator';
 
 export class CreateUserDto {
     @IsString()
     @IsNotEmpty()
-    @MinLength(50)
+    @Length(50)
+    @MinLength(3)
     username: string;
 
     @IsString()
     @IsNotEmpty()
-    @MinLength(255)
+    @Length(255)
+    @MinLength(6)
     password: string;
 
     @IsString()
     @IsOptional()
-    @MinLength(100)
+    @Length(100)
     name?: string;
 
     @IsEnum(['user', 'admin'])
