@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { ProfileResponseDto } from './dto/profile-respone.dto';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
             throw new UnauthorizedException();
         }
 
-        const payload = { sub: user.user_id, username: user.username };
+        const payload = { sub: user.user_id, username: user.username, name: user.name, role: user.role };
         
         return {
             access_token: await this.jwtService.signAsync(payload, {
@@ -55,6 +56,8 @@ export class AuthService {
             const newPayload = {
                 sub: user.user_id,
                 username: user.username,
+                name: user.name,
+                role: user.role
             };
 
             const access_token = await this.jwtService.signAsync(newPayload, {
@@ -70,4 +73,15 @@ export class AuthService {
         }
     }
 
+    async getProfile(userId: number): Promise<ProfileResponseDto> {
+        const user = await this.usersService.findOne(userId);
+        if (!user) throw new UnauthorizedException();
+
+        const dto = new ProfileResponseDto()
+        dto.user_id = user.user_id
+        dto.username = user.username
+        dto.name = user.name
+        dto.role = user.role
+
+        return dto}
 }

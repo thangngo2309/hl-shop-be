@@ -1,19 +1,21 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length, MinLength } from 'class-validator';
 
 export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()
-  @MinLength(255)
+  @Length(255)
+  @MinLength(6)
   password?: string;
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(50)
+  @Length(50)
+  @MinLength(3)
   username: string;
 
   @IsString()
   @IsOptional()
-  @MinLength(100)
+  @Length(100)
   name?: string;
 
   @IsEnum(['user', 'admin'])
