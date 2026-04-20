@@ -18,7 +18,7 @@ import { RolesGuard } from './roles.guard';
         secret: process.env.JWT_SECRET,
         signOptions: {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          expiresIn: (process.env.JWT_EXPIRES_IN || "10m") as any,
+          expiresIn: (process.env.JWT_EXPIRES_IN || "1h") as any,
         },
       }),
     }),
@@ -28,5 +28,6 @@ import { RolesGuard } from './roles.guard';
    {provide: APP_GUARD, useClass: RolesGuard} 
   ],
   controllers: [AuthController],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

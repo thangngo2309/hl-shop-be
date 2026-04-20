@@ -20,7 +20,7 @@ export class UsersService {
     const user = this.usersRepository.create({
       ...createUserDto,
       password,
-      role: role as UserRole,
+      role: role,
     });
     return await this.usersRepository.save(user);
   }
@@ -40,7 +40,7 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User | null> {
     const partialUser: Partial<User> = {
       ...updateUserDto,
-      role: updateUserDto.role ? (updateUserDto.role as UserRole) : undefined,
+      role: updateUserDto.role ? (updateUserDto.role) : undefined,
     };
 
     if (updateUserDto.password) {

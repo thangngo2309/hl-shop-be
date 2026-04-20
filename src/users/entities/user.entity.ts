@@ -1,9 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
-
-export enum UserRole {
-  USER = 'user',
-  ADMIN = 'admin',
-}
+import { UserRole } from "../../enum/users.enum"
 
 @Entity('users')
 @Unique(['username'])
@@ -18,8 +14,11 @@ export class User {
   password: string;
 
   @Column({ type: 'varchar', length: 100, nullable: true })
-  name: string | null;
+  name: string | null ;
 
   @Column({ type: 'enum', enum: UserRole })
   role: UserRole;
+
+  @Column({ type: 'text', nullable: true, default: 'https://example.com/images/avatar.png' })
+  avatar_url: string;
 }
