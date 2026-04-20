@@ -6,6 +6,8 @@ import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { ProductsModule } from './products/products.module';
+import { Product } from './products/entities/product.entity';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import { ConfigModule } from '@nestjs/config';
       username: 'postgres',
       password: '123456',
       database: 'hl_shop',
-      entities: [User],
+      entities: [User, Product],
       synchronize: true,
     }),
     AuthModule,
@@ -24,6 +26,7 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
