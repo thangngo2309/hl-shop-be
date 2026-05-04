@@ -18,7 +18,4 @@ export class User {
 
   @Column({ type: 'enum', enum: UserRole })
   role: UserRole;
-
-  @Column({ type: 'text', nullable: true, default: 'https://example.com/images/avatar.png' })
-  avatar_url: string;
 }
