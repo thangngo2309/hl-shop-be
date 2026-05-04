@@ -1,5 +1,4 @@
 import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
-
 export class CreateProductDto {
 
     @IsString()
@@ -10,9 +9,12 @@ export class CreateProductDto {
 
     @IsString()
     @IsOptional()
-    @MinLength(6)
-    @MaxLength(255)
+    @MaxLength(500)
     description: string;
+
+    @IsString()
+    @IsOptional()
+    info: string;
 
     @IsNumber()
     @IsNotEmpty()
@@ -21,10 +23,6 @@ export class CreateProductDto {
     @IsNumber()
     @IsNotEmpty()
     stock: number;
-
-    @IsString()
-    @IsOptional()
-    image: string;
 
     @IsBoolean()
     @IsNotEmpty()

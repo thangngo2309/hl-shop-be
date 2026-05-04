@@ -8,6 +8,9 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
 import { Product } from './products/entities/product.entity';
+import { ProductSpecs } from './products/entities/products-spec.entity';
+import { ImagesModule } from './images/images.module';
+import { Image } from './images/entities/image.entity';
 
 @Module({
   imports: [
@@ -18,7 +21,7 @@ import { Product } from './products/entities/product.entity';
       username: 'postgres',
       password: '123456',
       database: 'hl_shop',
-      entities: [User, Product],
+      entities: [User, Product, ProductSpecs, Image],
       synchronize: true,
     }),
     AuthModule,
@@ -27,6 +30,7 @@ import { Product } from './products/entities/product.entity';
       envFilePath: '.env',
     }),
     ProductsModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
